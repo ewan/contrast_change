@@ -1,0 +1,64 @@
+age,dob,hometown,sex,ethnicity,occupation,education,recording_date,speaker_id,province
+,1924,"Winnipeg",male,,,,,s40mmb,mb
+,1926,"Newmarket",male,,,,,s41mon,on
+,1927,"Barrie",male,,,,,s42mon,on
+,1923,"Winnipeg",male,,,,,s43mmb,mb
+,1930,"Lethbridge",male,,,,,s44mab,ab
+,1924,"Vancouver",female,,,,,s45fbc,bc
+,1924,"Mowbray Manitoba",male,,,,,s46mmb,mb
+,1916,"Markstay Ontario",female,,,,,s47fon,on
+,1934,"Ottawa",male,,,,,s48mon,on
+,1917,"Limerick Saskatchewan",male,,,,,s49msk,sk
+,1924,"Saskatoon",male,,,,,s50msk,sk
+,1919,"Toronto",male,,,,,s51mon,on
+,1933,"Ontario",female,,,,,s52fon,on
+,1920,"Saskatoon",female,,,,,s53fsk,sk
+,1919,"Kingston",male,,,,,s54mon,on
+,1934,"Toronto",male,,,,,s55mon,on
+,1934,"Hamilton",male,,,,,s56mon,on
+,1917,"Port Moody British Columbia",female,,,,,s57fbc,bc
+,1918,"Lamerton Alberta",male,,,,,s58mab,ab
+,1924,"Thunder Bay Ontario",male,,,,,s59mon,on
+,1932,"London",male,,,,,s60mon,on
+,1928,"Toronto",male,,,,,s61mon,on
+,1917,"Toronto",female,,,,,s62fon,on
+,1918,"Weyburn Saskatchewan",male,,,,,s63msk,sk
+25,1987,"Prince George British Columbia",female,"Caucasian","actor","two years post-secondary","12/06/2013",s01fbc,bc
+20,1994,"Brandon Manitoba",male,"Caucasian","student","Subject has completed his first year of university.","12/05/2014",s02mmb,mb
+71,1928,"Windsor Ontario",female,"Caucasian","tutor","college","18/08/1999",s03fon,on
+47,1961,"London Ontario",male,"Caucasian","high school music teacher","university degree","08/11/2008",s04mon,on
+19,1989,"Fergus Ontario",female,"Caucasian","student and teacher (working in theatre and with people with disabilities)","university","24/10/2008",s05fon,on
+47,1961,"St. Thomas Ontario",female,"Caucasian with western European background","high school teacher","university degree in English","08/11/2008",s06fon,on
+37,1971,"St. Thomas Ontario",female,"Caucasian","provincial-offenses officer","some university education with several college programs","12/11/2008",s07fon,on
+47,1961,"Carlisle Ontario",male,"Caucasian","art teacher and musician","university degree in art and drama and a bachelors degree in education","29/12/2008",s08mon,on
+17,1990,"London Ontario",female,"Caucasian","visual artist and customer-service representative","high school graduate","27/12/2008",s09fon,on
+31,1977,"Ottawa Ontario",female,"Caucasian","teacher of the Alexander Technique","university degree in music some post-graduate work","17/11/2008",s10fon,on
+48,1960,"Mattawa Ontario",male,"Caucasian","mechanical engineer high school teacher","university degree in engineering","22/11/2008",s11mon,on
+49,1959,"Hamilton Ontario",male,"Caucasian","engineer","bachelors degree","23/11/2008",s12mon,on
+53,1955,"Dundas Ontario (near Hamilton)",male,"Caucasian","public-health inspector","high school graduate","24/11/2008",s13mon,on
+20,1988,"Woodbridge (suburb of Toronto) Ontario",female,"Caucasian (Italian-Canadian)","student","At the time of the recording she was studying acting at York University.",2008,s14fon,on
+55,1953,"Guelph Ontario",female,"Caucasian","health promoter with the regional government","university degree","24/11/2008",s15fon,on
+44,1964,"Sault Ste. Marie Ontario",female,"Caucasian","risk-management coordinator","university degree","24/11/2008",s16fon,on
+52,1956,"Cobourg Ontario",female,"Caucasian","clerk","high school graduate","24/11/2008",s17fon,on
+37,1971,"Parry Sound Ontario",male,"Caucasian","lawyer","university degree","24/11/2008",s18mon,on
+54,1954,"Kitchener Ontario",female,"Caucasian","law clerk","university degree","24/11/2008",s19fon,on
+45,1963,"Scarborough Ontario",female,"Caucasian","health promoter","bachelors degree","24/11/2008",s20fon,on
+25,1983,"Burlington Ontario",female,"Caucasian","government communications","university degree","24/11/2008",s21fon,on
+33,1975,"Hamilton Ontario",female,"Caucasian","environmental specialist","university degree","11/24/2008",s22fon,on
+30,1978,"Brockville Ontario",female,"Caucasian","health inspector for the regional government","bachelors degree","24/11/2008",s23fon,on
+58,1950,"Bowmanville Ontario",female,"Caucasian","public-health inspector","college","24/11/2008",s24fon,on
+49,1956,"Sarnia Ontario",male,"Caucasian","farmer",,"2005",s25mon,on
+35,1973,"Newmarket Ontario",male,"Caucasian","GIS technician","bachelors degree","30/11/2008",s26mon,on
+55,1953,"Hamilton Ontario",female,"Caucasian","theatre designer and teacher","some college","19/01/2009",s27fon,on
+43,1965,"Toronto Ontario",female,"Caucasian of Greek ancestry","administrative assistant","career college certification","27/01/2009",s28fon,on
+45,1963,"Red Deer Alberta",female,"Caucasian","university professor","masters degree","27/01/2009",s29fon,on
+62,1951,"Germany (but moved to Toronto as an infant)",male,"Caucasian","President and CEO of Devon Energy","law degree from University of Windsor","12/07/2013",s30mon,on
+20,1993,"Oakville Ontario",male,"Caucasian","student","Subject was in his second year of university when recorded.","08/05/2014",s31mon,on
+45,1959,"Sarnia Ontario",female,"Caucasian",,,"2005",s32fon,on
+27,1980,"Kitchener/Waterloo Ontario",male,"Caucasian","insurance broker","college diploma","21/01/2007",s33mon,on
+47,1961,"Hanover Ontario",female,"Caucasian","F.L.M. for Ontario Power Generation","college diploma","28/01/2009",s34fon,on
+60,1940,"Wolseley Saskatchewan",female,"Caucasian","homemaker","high school","07/05/2000",s35fsk,sk
+36,1964,"Wolseley Saskatchewan",male,"Caucasian","general manager of a manufacturing and retail business","one year of university","07/05/2000",s36msk,sk
+44,1955,"Wolseley Saskatchewan",male,"Caucasian","information technologist","high school","2000",s37msk,sk
+20,1980,"Regina Saskatchewan",female,"Caucasian","nanny","high school","07/05/2000",s38fsk,sk
+45,1955,"Regina Saskatchewan",female,"Caucasian","office manager","high school","07/05/2000",s39fsk,sk
