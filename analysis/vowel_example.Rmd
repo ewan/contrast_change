@@ -1,0 +1,54 @@
+---
+title: "Examples of vowel change plots (using TIMIT labels)"
+output: html_document
+---
+
+```{r setup include=FALSE}
+library(rphonch)
+```
+
+```{r load, include=FALSE}
+rep_dirs <- list.dirs("../reps/", full.names=T, recursive=F)
+names(rep_dirs) <- list.dirs("../reps/", recursive=F, full.names=F)
+reps_l <- list()
+for (r in names(rep_dirs)) {
+  r_files <- dir(rep_dirs[r], pattern="*.rep", full.names=T)
+  r_meta <- read.csv(paste0(rep_dirs[r], "/meta_info.csv"))
+  r_reps <- ldply(r_files, .fun=read_rep)
+  r_reps <- ddply(r_reps, .(speaker_id), transform,
+                  X0=(X0-mean(X0, na.rm=T))/sd(X0, na.rm=T))
+  r_reps <- split_vowel_and_stress(r_reps)
+  r_reps <- merge(r_reps, r_meta)
+  r_reps$rep <- r
+  reps_l[[r]] <- r_reps
+}
+reps <- do.call("rbind", reps_l)
+```
+
+Back vowels
+------
+
+```{r back-vowels}
+d <- reps %$% reps[phoneme %in% c("UW","OW","AA","IY") &
+                   stress %in% c("S1", "S2"),]
+p <- ggplot(d, aes(x=dob, y=X0, colour=phoneme)) +
+      geom_smooth(lwd=3) +
+      theme(text=element_text(size=20)) +
+      xlab("Date of birth") +
+      facet_wrap(~ rep, scales="free_y", shrink=T)
+print(p)
+```
+
+Front lax vowels
+------
+
+```{r front-lax-vowels}
+d <- reps %$% reps[phoneme %in% c("IY","IH","EH","AE") &
+                   stress %in% c("S1", "S2"),]
+p <- ggplot(d, aes(x=dob, y=X0, colour=phoneme)) +
+      geom_smooth(lwd=3) +
+      theme(text=element_text(size=20)) +
+      xlab("Date of birth") +
+      facet_wrap(~ rep, scales="free_y", shrink=T)
+print(p)
+```
