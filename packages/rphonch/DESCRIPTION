@@ -1,0 +1,9 @@
+Package: rphonch
+Title: Tools for analyzing phonetic change
+Version: 0.0.0.9000
+Authors@R: person("Ewan", "Dunbar", , "emd@umd.edu", role = c("aut", "cre"))
+Description: Functions for loading one-dimensional phonetic representations associated with speaker metadata in a standard format and for plotting change over apparent time
+Depends: R (>= 3.1.1)
+Imports: plyr, reshape, magrittr, ggplot2, rstan
+License: GPL-2
+LazyData: true
