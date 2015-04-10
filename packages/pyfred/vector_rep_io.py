@@ -15,9 +15,9 @@ def which_rep_columns(column_names):
 def read_vector_rep(vector_fl):
     raw_table = pd.read_csv(vector_fl)
     rep_columns = which_rep_columns(raw_table.columns)
-    vector_rep = raw_table[:,rep_columns].values
-    other_columns = raw_table[:,~rep_columns]
-    labels = raw_table[:,"label"]
+    vector_rep = raw_table.ix[:,rep_columns].values
+    other_columns = raw_table.ix[:,~rep_columns]
+    labels = raw_table.ix[:,"phoneme"]
     return vector_rep, other_columns, labels
 
 def vector_fl_to_fileid(vector_fl):

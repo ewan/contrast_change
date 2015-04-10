@@ -9,7 +9,7 @@ import numpy as np
 def fileid_to_fred_fl(fileid):
     return fileid + ".frd"
 
-def write_fred(fred, fred_fl):
+def write_fred(fred_fl, fred):
     np.savetxt(fred_fl, fred)
 
 def read_fred(fred_fl):

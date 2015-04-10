@@ -6,7 +6,7 @@ read_rep <- function(fn) {
 }
 
 split_vowel_and_stress <- function(d) {
-  v_orig <- d %$% as.character(v)
+  v_orig <- d %$% as.character(phoneme)
   phoneme <- sub("[[:digit:]]$", "", v_orig)
   stress_raw <- sub("^[[:alpha:]]+", "", v_orig)
   stress <- rep("", length(stress_raw))
