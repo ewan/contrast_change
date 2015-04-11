@@ -3,7 +3,7 @@ title: "Examples of vowel change plots (using TIMIT labels)"
 output: html_document
 ---
 
-```{r setup include=FALSE}
+```{r setup, include=FALSE}
 library(plyr)
 library(magrittr)
 library(rphonch)
@@ -38,7 +38,7 @@ reps_spkr <- do.call("rbind", reps_spkr_l)
 Back vowels
 ------
 
-```{r back-vowels}
+```{r back-vowels, message=FALSE, fig.height=20}
 d <- reps %$% reps[phoneme %in% c("UW","OW","AA","IY") &
                    !(np1_phone %in% c("L","N","M","R","NG")) &
                    stress %in% c("S1", "S2"),]
@@ -46,19 +46,19 @@ p <- ggplot(d, aes(x=dob, y=X0, colour=phoneme)) +
       geom_smooth(lwd=3) +
       theme(text=element_text(size=20)) +
       xlab("Date of birth") +
-      facet_wrap(~ rep, scales="free_y", shrink=T) +
+      facet_wrap(~ rep, scales="free_y", shrink=T, ncol=2) +
       scale_colour_manual(values=color_palette)
 print(p)
 ```
 
-```{r back-vowels-spkr}
+```{r back-vowels-spkr, message=FALSE, fig.height=20}
 d <- reps_spkr %$% reps_spkr[phoneme %in% c("UW","OW","AA","IY") &
                              stress %in% c("S1", "S2"),]
 p <- ggplot(d, aes(x=dob, y=X0, colour=phoneme)) +
       geom_smooth(lwd=3) +
       theme(text=element_text(size=20)) +
       xlab("Date of birth") +
-      facet_wrap(~ rep, scales="free_y", shrink=T) +
+      facet_wrap(~ rep, scales="free_y", shrink=T, ncol=2) +
       scale_colour_manual(values=color_palette)
 print(p)
 ```
@@ -67,7 +67,7 @@ print(p)
 Front lax vowels
 ------
 
-```{r front-lax-vowels}
+```{r front-lax-vowels, message=FALSE, fig.height=20}
 d <- reps %$% reps[phoneme %in% c("IY","IH","EH","AE", "AA") &
                    !(np1_phone %in% c("L","N","M","R","NG")) &
                    stress %in% c("S1", "S2"),]
@@ -75,12 +75,12 @@ p <- ggplot(d, aes(x=dob, y=X0, colour=phoneme)) +
       geom_smooth(lwd=3) +
       theme(text=element_text(size=20)) +
       xlab("Date of birth") +
-      facet_wrap(~ rep, scales="free_y", shrink=T) +
+      facet_wrap(~ rep, scales="free_y", shrink=T, ncol=2) +
       scale_colour_manual(values=color_palette)
 print(p)
 ```
 
-```{r front-lax-vowels-spkr}
+```{r front-lax-vowels-spkr, message=FALSE, fig.height=20}
 d <- reps_spkr %$% reps_spkr[phoneme %in% c("IY","IH","EH","AE", "AA") &
                              !(np1_phone %in% c("L","N","M","R","NG")) &
                              stress %in% c("S1", "S2"),]
@@ -88,12 +88,12 @@ p <- ggplot(d, aes(x=dob, y=X0, colour=phoneme)) +
       geom_smooth(lwd=3) +
       theme(text=element_text(size=20)) +
       xlab("Date of birth") +
-      facet_wrap(~ rep, scales="free_y", shrink=T) +
+      facet_wrap(~ rep, scales="free_y", shrink=T, ncol=2) +
       scale_colour_manual(values=color_palette)
 print(p)
 ```
 
-```{r front-lax-vowels-context}
+```{r front-lax-vowels-context, message=FALSE, fig.height=20}
 d <- reps %$% reps[phoneme %in% c("IY","IH","EH","AE", "AA") &
                    stress %in% c("S1", "S2"),]
 d$np1_son <- d %$% np1_phone %in% c("L","N","M","R","NG")
@@ -101,7 +101,7 @@ p <- ggplot(d, aes(x=dob, y=X0, colour=phoneme, linetype=np1_son)) +
       geom_smooth(lwd=3) +
       theme(text=element_text(size=20)) +
       xlab("Date of birth") +
-      facet_wrap(~ rep, scales="free_y", shrink=T)
+      facet_wrap(~ rep, scales="free_y", shrink=T, ncol=2)
 print(p)
 ```
 
