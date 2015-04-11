@@ -19,6 +19,24 @@ def difference_fred(vector_rep, labels, plus_labels, minus_labels):
     return result
 
 
+def lda_fred(vector_rep, labels, plus_loc_labels, minus_loc_labels,
+             plus_cov_labels, minus_cov_labels):
+    plus_loc_indices = np.array([v in plus_loc_labels for v in labels])
+    minus_loc_indices = np.array([v in minus_loc_labels for v in labels])
+    x_p_l, x_m_l = vector_rep[
+        plus_loc_indices, :], vector_rep[minus_loc_indices, :]
+    mn_p, mn_m = x_p_l.mean(axis=0), x_m_l.mean(axis=0)
+    plus_cov_indices = np.array([v in plus_cov_labels for v in labels])
+    minus_cov_indices = np.array([v in minus_cov_labels for v in labels])
+    x_p_c, x_m_c = vector_rep[
+        plus_cov_indices, :], vector_rep[minus_cov_indices, :]
+    cov_p, cov_m = np.cov(x_p_c, rowvar=False), np.cov(x_m_c, rowvar=False)
+    scale_mat = np.linalg.inv(cov_p + cov_m)
+    fred_unnorm = scale_mat.dot(mn_p - mn_m)
+    result = fred_unnorm / np.linalg.norm(fred_unnorm)
+    return result
+
+
 def anchor_fred(vector_rep, labels, anchor_labels):
     anchor_indices = np.array([v in anchor_labels for v in labels])
     return vector_rep[anchor_indices, :].mean(axis=0)
@@ -26,11 +44,24 @@ def anchor_fred(vector_rep, labels, anchor_labels):
 
 def select_fred_fn(fred_type):
     if fred_type == "difference":
-        result = lambda v, l, args: difference_fred(
-            v, l, args.plus_labels, args.minus_labels)
+        def f(v, l, args):
+            return difference_fred(v, l, args.plus_labels, args.minus_labels)
+    elif fred_type == "lda":
+        def f(v, l, args):
+            if args.plus_covariance_labels is None:
+                plus_covariance_labels = args.plus_labels
+            else:
+                plus_covariance_labels = args.plus_covariance_labels
+            if args.minus_covariance_labels is None:
+                minus_covariance_labels = args.minus_labels
+            else:
+                minus_covariance_labels = args.minus_covariance_labels
+            return lda_fred(v, l, args.plus_labels, args.minus_labels,
+                            plus_covariance_labels, minus_covariance_labels)
     elif fred_type == "anchor":
-        result = lambda v,l, args: anchor_fred(v, l, args.plus_labels)
-    return result
+        def f(v, l, args):
+            return anchor_fred(v, l, args.plus_labels)
+    return f
 
 
 def create_parser():
@@ -38,18 +69,22 @@ def create_parser():
     parser = argparse.ArgumentParser()
     parser.add_argument('--version', action='version', version='%(prog)s ' +
                         __version__)
-    parser.add_argument('--output', help='output target filename, or'
+    parser.add_argument('--output', help='output target filename, or '
                         'directory name if --per-file is set')
     parser.add_argument('--per-file', help='generate one fred per file',
-                        action='store_true', default=True)
-    parser.add_argument('--plus-labels', help='labels defining positive'
+                        action='store_true', default=False)
+    parser.add_argument('--plus-labels', help='labels defining positive '
                         'endpoint of fred')
-    parser.add_argument('--minus-labels', help='labels defining negative'
-                        'direction of fred')
-    parser.add_argument('--fred-type', help='type of fred to compute'
-                        '(available options: difference, anchor)',
+    parser.add_argument('--minus-labels', help='labels defining negative '
+                        'direction of fred (difference, lda)')
+    parser.add_argument('--plus-covariance-labels', help='labels defining '
+                        'positive covariance of fred (lda)', default=None)
+    parser.add_argument('--minus-covariance-labels', help='labels defining '
+                        'negative covariance of fred (lda)', default=None)
+    parser.add_argument('--fred-type', help='type of fred to compute '
+                        '(available options: difference, lda, anchor)',
                         default="difference")
-    parser.add_argument('vector_files', help='files containing vector'
+    parser.add_argument('vector_files', help='files containing vector '
                         'representations', nargs='+')
     return parser
 

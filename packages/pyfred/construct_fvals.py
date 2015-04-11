@@ -24,12 +24,21 @@ def create_parser():
     parser.add_argument('--version', action='version', version='%(prog)s ' +
                         __version__)
     parser.add_argument('--output-dir', help='target output directory')
-    parser.add_argument('--per-file', help='generate one fred per file',
-                        action='store_true', default=True)
+    aggregation_opts = parser.add_mutually_exclusive_group()
+    aggregation_opts.add_argument('--per-file',
+                                  help='generate one fred per file',
+                                  action='store_true', default=False)
+    aggregation_opts.add_argument('--fred-files',
+                                  help='generate fred by aggregating '
+                                  'only within the listed files', default=None)
     parser.add_argument('--plus-labels', help='labels defining positive'
                         'endpoint of fred')
     parser.add_argument('--minus-labels', help='labels defining negative'
-                        'direction of fred')
+                        'endpoint of fred')
+    parser.add_argument('--plus-covariance-labels', help='labels defining '
+                        'positive covariance of fred (lda)', default=None)
+    parser.add_argument('--minus-covariance-labels', help='labels defining '
+                        'negative covariance of fred (lda)', default=None)
     parser.add_argument('--fred-type', help='type of fred to compute'
                         '(available options: difference, anchor)',
                         default="difference")
@@ -42,6 +51,8 @@ def parse_args(arguments):
     """Parse command-line options."""
     parser = create_parser()
     args = parser.parse_args(arguments)
+    if args.fred_files is not None:
+        args.fred_files = args.fred_files.split()
     return args
 
 
@@ -62,22 +73,24 @@ if __name__ == '__main__':
             fval_fl = osp.join(args.output_dir, fileid_to_fval_fl(fileid))
             write_fval_rep(fval_fl, fval_rep, other_columns)
     else:
-        vector_reps = {}
-        other_columns = {}
         agg_vector_rep = None
         agg_labels = np.array([])
-        for vector_fl in args.vector_files:
+        if args.fred_files is not None:
+            fred_files = args.fred_files
+        else:
+            fred_files = args.vector_files
+        for vector_fl in fred_files:
             fileid = vector_fl_to_fileid(vector_fl)
-            vector_reps[fileid], other_columns[fileid], labels = \
-                read_vector_rep(vector_fl)
+            vector_rep, _, labels = read_vector_rep(vector_fl)
             if agg_vector_rep is None:
-                agg_vector_rep = vector_reps[fileid]
+                agg_vector_rep = vector_rep
             else:
-                agg_vector_rep = np.append(agg_vector_rep, vector_reps[fileid],
-                                           axis=0)
+                agg_vector_rep = np.append(agg_vector_rep, vector_rep, axis=0)
             agg_labels = np.append(agg_labels, labels)
         fred = fred_fn(agg_vector_rep, agg_labels, args)
-        for fileid in vector_reps:
-            fval_rep = fval_fn(vector_reps[fileid], fred)
+        for vector_fl in args.vector_files:
+            fileid = vector_fl_to_fileid(vector_fl)
+            vector_rep, other_columns, _ = read_vector_rep(vector_fl)
+            fval_rep = fval_fn(vector_rep, fred)
             fval_fl = osp.join(args.output_dir, fileid_to_fval_fl(fileid))
-            write_fval_rep(fval_fl, fval_rep, other_columns[fileid])
+            write_fval_rep(fval_fl, fval_rep, other_columns)
